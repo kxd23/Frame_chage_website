@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f0fa">
+  <meta name="description" content="日新书院第五届学生节 · 一百零一夜头像框。挑选你的星光，在本机制作专属头像。">
+  <title>一百零一夜 · 学生节头像框</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="heading">
+      <p class="eyebrow">日新书院 · 第五届学生节</p>
+      <h1>一百零一夜<span aria-hidden="true">✦</span></h1>
+      <p class="intro">把这一夜的星光，装进你的头像。</p>
+    </header>
+    <div class="workspace">
+      <section class="editor-card" aria-label="头像预览与调整">
+        <div class="card-top"><h2>你的专属头像</h2><span id="preview-label">先选一张喜欢的照片</span></div>
+        <div class="preview">
+          <canvas id="preview" width="1024" height="1024" tabindex="0" role="img" aria-label="头像预览；选图后可拖动、双指缩放，或用方向键移动"></canvas>
+          <div id="loading" class="canvas-status">正在点亮星光…</div>
+        </div>
+        <div class="adjustment"><span>单指移动 · 双指缩放</span><button id="reset" class="text-button" disabled>重置</button></div>
+        <div class="zoom-row"><label for="zoom">缩放</label><input id="zoom" type="range" min="0.5" max="4" step="0.01" value="1" disabled><output id="zoom-value" for="zoom">100%</output></div>
+        <button id="choose" class="choose" disabled>从相册选择照片</button>
+        <input id="photo" type="file" accept="image/*" hidden>
+        <p id="photo-hint" class="photo-hint">推荐选择原图，生成的头像会更清晰。</p>
+      </section>
+      <section class="controls" aria-label="选择头像框并生成">
+        <div class="section-title"><h2>挑一款，留下你的光</h2><span>共 4 款头像框</span></div>
+        <div class="frame-grid" role="group" aria-label="头像框">
+          <button class="frame-option" data-frame="1" aria-pressed="true" aria-label="星光 01" disabled><img src="./assets/frames/thumb-1.png" alt="" width="192" height="192"><span>星光 01</span><small>已选择</small></button>
+          <button class="frame-option" data-frame="2" aria-pressed="false" aria-label="星光 02" disabled><img src="./assets/frames/thumb-2.png" alt="" width="192" height="192"><span>星光 02</span><small>试试看</small></button>
+          <button class="frame-option" data-frame="3" aria-pressed="false" aria-label="星光 03" disabled><img src="./assets/frames/thumb-3.png" alt="" width="192" height="192"><span>星光 03</span><small>试试看</small></button>
+          <button class="frame-option" data-frame="4" aria-pressed="false" aria-label="星光 04" disabled><img src="./assets/frames/thumb-4.png" alt="" width="192" height="192"><span>星光 04</span><small>试试看</small></button>
+        </div>
+        <button id="generate" class="primary" disabled>生成新头像</button>
+        <p class="save-caption">1024 × 1024 PNG 导出 · 照片仅在本机合成</p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div class="tips"><h2>换上新头像，只差最后一步</h2><p>生成后，长按图片保存或点击下载。然后前往「微信 → 我 → 点击头像 → 头像」，从相册选择新图片。</p></div>
+        <p class="local-note">不上传照片，无需登录，选好就能制作。</p>
+      </section>
+    </div>
+    <footer><button id="privacy" class="text-button">隐私说明</button><span aria-hidden="true">·</span><button id="share" class="text-button">复制链接，邀请朋友</button></footer>
+    <noscript>请在浏览器中启用 JavaScript，才能选择照片和制作头像。</noscript>
+  </main>
+  <dialog id="result-dialog" aria-labelledby="result-title">
+    <div class="dialog-top"><h2 id="result-title">你的星光，已就位</h2><button class="text-button" data-close>关闭</button></div>
+    <p class="result-instruction">手机上请长按下方图片，选择「保存图片」。</p>
+    <img id="result-image" class="result-image" alt="已生成的头像，长按可保存" width="1024" height="1024">
+    <a id="download" class="primary" download="一百零一夜-头像.png">下载 PNG 图片</a>
+    <p class="dialog-note">微信内若无法下载，请长按图片保存；也可用右上角菜单在浏览器中打开。</p>
+  </dialog>
+  <dialog id="privacy-dialog" aria-labelledby="privacy-title">
+    <div class="dialog-top"><h2 id="privacy-title">隐私说明</h2><button class="text-button" data-close>关闭</button></div>
+    <p>你选择的照片只在当前浏览器内读取、调整和合成，不会上传至服务器，也不会由本工具保存到云端。</p>
+    <p>本工具没有登录、图片安全检测、访问统计或公开图片库。关闭或刷新页面后，需重新选择照片。</p>
+    <p>网页及头像框由 GitHub Pages 提供。访问网站时，托管平台可能按其隐私政策记录 IP 等访问日志；这些日志不包含你选择的照片。</p>
+  </dialog>
+</body>
+</html>
