@@ -63,3 +63,6 @@ dialog p { font-size: 14px; line-height: 1.8; margin: 12px 0; color: var(--muted
 .result-instruction { color: #6c448f; }
 @media (max-width: 760px) { .page { max-width: 520px; padding: 32px 20px max(24px, env(safe-area-inset-bottom)); } .workspace { grid-template-columns: 1fr; gap: 28px; } .editor-card { padding: 20px; } .heading { margin-bottom: 24px; } .section-title { margin-top: 0; } .frame-grid { gap: 8px; } .frame-option { padding: 8px 6px; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Keep copy feedback visible even when the page is scrolled to its footer. */
+.share-notice { position: fixed; z-index: 1000; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: calc(100vw - 40px); padding: 16px 20px; border-radius: 12px; background: var(--ink); color: #fff; box-shadow: 0 8px 24px #25163033; font-size: 14px; line-height: 1.7; text-align: center; pointer-events: none; }

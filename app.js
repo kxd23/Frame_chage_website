@@ -210,9 +210,28 @@ $('generate').addEventListener('click', async () => {
 });
 document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
 $('privacy').addEventListener('click', () => $('privacy-dialog').showModal());
+let shareMessageTimer;
+function showShareMessage(message, duration) {
+  clearTimeout(shareMessageTimer);
+  const notice = $('share-status');
+  notice.textContent = message;
+  notice.hidden = false;
+  shareMessageTimer = setTimeout(() => { notice.hidden = true; }, duration);
+}
 $('share').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(location.href); status('链接已复制，可以发给朋友或制作二维码。'); }
-  catch { status('当前浏览器无法自动复制，请从浏览器地址栏或微信右上角菜单复制链接。'); }
+  const button = $('share');
+  if (button.disabled) return;
+  button.disabled = true;
+  showShareMessage('正在复制链接…', 8000);
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(location.href);
+    showShareMessage('链接已复制，可以发给朋友啦！', 5000);
+  } catch {
+    showShareMessage('未能自动复制，请从微信右上角菜单或浏览器地址栏手动复制链接。', 10000);
+  } finally {
+    button.disabled = false;
+  }
 });
 
 async function init() {
