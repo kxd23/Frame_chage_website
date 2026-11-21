@@ -360,6 +360,8 @@ context.fillText('让你的星光，在这里闪耀', 512, 630);
 - `index.html` 中 `id="zoom"` 的 `min`、`max`。
 - `geometry.mjs` 中 `constrain()`、`zoomAt()` 两处 `clamp(..., .5, 4)`。
 
+未选择照片时，预览区域允许手机滑动页面。选好照片后，`updateControls()` 会设置画布的 `data-has-avatar="true"`，CSS 随之启用 `touch-action: none`，让手势用于拖动与缩放头像。不要把所有画布固定设置为 `touch-action: none`，否则空预览会挡住页面滑动。
+
 当前允许把照片自由拖出边界，也允许缩小到不足以铺满画布；露出的部分使用画布底色填充。
 
 ### 照片限制

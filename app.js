@@ -36,6 +36,7 @@ function loadFrame(id) {
 }
 function status(message = '') { $('status').textContent = message; }
 function updateControls() {
+  canvas.setAttribute('data-has-avatar', String(Boolean(avatar)));
   $('choose').disabled = busy || !frame;
   $('choose').textContent = busy ? '正在处理…' : avatar ? '换一张照片' : '从相册选择照片';
   $('generate').disabled = busy || !avatar || !frame;
