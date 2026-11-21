@@ -189,9 +189,19 @@ $('generate').addEventListener('click', async () => {
   try {
     draw();
     const blob = await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('图片生成失败，请重试。')), 'image/png'));
+    // Android WeChat's native save menu may not resolve page-owned blob URLs.
+    // Embed the same PNG bytes in the preview; keep a Blob URL for downloading.
+    const previewData = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('图片准备失败，请重新生成。'));
+      reader.onabort = () => reject(new Error('图片准备已取消，请重新生成。'));
+      reader.readAsDataURL(blob);
+    });
+    await loadImage(previewData);
     if (resultUrl) URL.revokeObjectURL(resultUrl);
     resultUrl = URL.createObjectURL(blob);
-    $('result-image').src = resultUrl;
+    $('result-image').src = previewData;
     $('download').href = resultUrl;
     $('download').download = `一百零一夜-星光${selectedId}.png`;
     $('result-dialog').showModal(); status('');
