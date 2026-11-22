@@ -70,8 +70,8 @@ function draw() {
     context.fill();
     context.fillStyle = '#6c5586';
     context.textAlign = 'center';
-    context.font = '36px "Microsoft YaHei", sans-serif';
-    context.fillText('让你的星光，在这里闪耀', 512, 550);
+    context.font = '42px "Microsoft YaHei", sans-serif';
+    context.fillText('你的星光，在这里', 512, 550);
   }
   if (frame) context.drawImage(frame, 0, 0, SIZE, SIZE);
 }
